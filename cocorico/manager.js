@@ -40,6 +40,22 @@ class Manager {
         if(this.state.etat==="pending" || this.state.etat==="open") return;
         else this.setEtat("pending");
 
+        const Gpio = require('pigpio').Gpio;
+        const button = new Gpio(21, {
+            mode: Gpio.INPUT,
+            pullUpDown: Gpio.PUD_DOWN,
+            edge: Gpio.EITHER_EDGE
+        });
+        let boucle=true;
+        button.on('interrupt', (level) => {
+            console.log("interrupt")
+            boucle=false;
+        });
+
+        button.on('alert', (level, tick) => {
+            console.log("alert",level)
+        });
+
         setTimeout(()=>{
             this.setEtat("open");
         },10000);
