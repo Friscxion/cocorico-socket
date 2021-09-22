@@ -42,18 +42,19 @@ class Manager {
 
         const Gpio = require('pigpio').Gpio;
         const button = new Gpio(21, {
-            mode: Gpio.INPUT,
-            pullUpDown: Gpio.PUD_DOWN,
-            edge: Gpio.EITHER_EDGE
+            ode: Gpio.INPUT,
+            pullUpDown: Gpio.PUD_UP,
+            alert: true
         });
-        let boucle=true;
-        button.on('interrupt', (level) => {
-            console.log("interrupt")
-            boucle=false;
-        });
+        let count = 0;
+
+        // Level must be stable for 10 ms before an alert event is emitted.
+        button.glitchFilter(10000);
 
         button.on('alert', (level, tick) => {
-            console.log("alert",level)
+            if (level === 0) {
+                console.log(++count);
+            }
         });
 
         setTimeout(()=>{
