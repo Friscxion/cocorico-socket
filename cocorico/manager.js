@@ -70,7 +70,7 @@ class Manager {
 
         setTimeout(()=>{
             this.setEtat("closed");
-        },10000);
+        },100);
 
         return;
     }
