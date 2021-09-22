@@ -46,22 +46,19 @@ class Manager {
             pullUpDown: Gpio.PUD_UP,
             alert: true
         });
-        let count = 0;
 
         // Level must be stable for 10 ms before an alert event is emitted.
         button.glitchFilter(10000);
 
         button.on('alert', (level, tick) => {
             if (level === 0) {
-                console.log(++count);
+                this.setEtat("open");
             }
         });
 
-        setTimeout(()=>{
-            this.setEtat("open");
-        },10000);
 
-        return;
+
+
     }
 
     fermer = () => {
