@@ -83,11 +83,39 @@ class Manager {
         if(this.state.etat==="pending" || this.state.etat==="closed") return;
         else this.setEtat("pending");
 
-        setTimeout(()=>{
-            this.setEtat("closed");
-        },100);
+        const Gpio = require('pigpio').Gpio;
+        const button = new Gpio(16, {
+            ode: Gpio.INPUT,
+            pullUpDown: Gpio.PUD_UP,
+            alert: true
+        });
 
-        return;
+        let pass=true;
+
+        const led = new Gpio(14, {mode: Gpio.OUTPUT});
+        let dutyCycle = 0;
+
+        setInterval(() => {
+            led.pwmWrite(dutyCycle);
+
+            dutyCycle += 5;
+            if (dutyCycle > 255) {
+                dutyCycle = 0;
+            }
+        }, 20);
+        // Level must be stable for 10 ms before an alert event is emitted.
+        button.glitchFilter(10000);
+
+        button.on('alert', (level, tick) => {
+            if (level === 0 && pass) {
+                pass=false;
+                this.setEtat("closed");
+            }
+        });
+
+
+
+
     }
 
     setSunrise = (add,callback) => {
