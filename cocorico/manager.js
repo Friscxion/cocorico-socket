@@ -47,9 +47,21 @@ class Manager {
             alert: true
         });
 
+        let pass=true;
+
+        const motor = new Gpio(14, {mode: Gpio.OUTPUT});
+        let pulseWidth = 1000;
+        let increment = 100;
+        let interval=setInterval(() => {
+            motor.servoWrite(pulseWidth);
+            pulseWidth += increment;
+            if(!pass)
+                clearInterval(interval);
+        }, 100);
+
         // Level must be stable for 10 ms before an alert event is emitted.
         button.glitchFilter(10000);
-        let pass=true;
+
         button.on('alert', (level, tick) => {
             if (level === 0 && pass) {
                 pass=false;

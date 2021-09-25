@@ -18,3 +18,4 @@ let interval=setInterval(() => {
     if(!boucle)
         clearInterval(interval);
 }, 100);
+
