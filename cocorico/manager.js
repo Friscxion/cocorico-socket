@@ -48,31 +48,20 @@ class Manager {
         });
 
         let pass=true;
-
-        const motor = new Gpio(14, {mode: Gpio.OUTPUT});
-        let pulseWidth = 1000;
-        let increment = 100;
-        let interval=setInterval(() => {
-            motor.servoWrite(pulseWidth);
-            pulseWidth += increment;
-            if (pulseWidth >= 2000) {
-                increment = -100;
-            } else if (pulseWidth <= 1000) {
-                increment = 100;
-            }
-            if(!pass)
-                clearInterval(interval);
-        }, 100);
-
-        // Level must be stable for 10 ms before an alert event is emitted.
         button.glitchFilter(10000);
-
         button.on('alert', (level, tick) => {
             if (level === 0 && pass) {
                 pass=false;
                 this.setEtat("open");
             }
         });
+
+        const motor = new Gpio(14, {mode: Gpio.OUTPUT});
+        motor.pwmWrite(100);
+        motor.start(0);
+
+
+
 
 
 
@@ -91,20 +80,6 @@ class Manager {
         });
 
         let pass=true;
-
-        const led = new Gpio(14, {mode: Gpio.OUTPUT});
-        let dutyCycle = 0;
-
-        setInterval(() => {
-            led.pwmWrite(dutyCycle);
-
-            dutyCycle += 5;
-            if (dutyCycle > 255) {
-                dutyCycle = 0;
-            }
-        }, 20);
-        // Level must be stable for 10 ms before an alert event is emitted.
-        button.glitchFilter(10000);
 
         button.on('alert', (level, tick) => {
             if (level === 0 && pass) {
