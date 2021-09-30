@@ -1,9 +1,11 @@
 {
   "dependencies": {
     "express": "^4.17.1",
+    "motor-l298n": "^0.0.1",
     "nconf": "^0.11.3",
     "node-schedule": "^2.0.0",
     "pigpio": "^3.3.1",
+    "rpi-gpio": "^2.1.7",
     "socket.io": "^4.2.0",
     "socket.io-client": "^4.2.0",
     "sunrise-sunset-js": "^2.2.1"

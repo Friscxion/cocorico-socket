@@ -8,5 +8,5 @@ const motor1B = 15; // Green wire
 gpiop.setup(motor1A, gpio.DIR_OUT);
 gpiop.setup(motor1B, gpio.DIR_OUT);
 
-gpio.write(motor1A, true); // 1 & 0 => Clockwise
-gpio.write(motor1B, false);
+gpiop.write(motor1A, true); // 1 & 0 => Clockwise
+gpiop.write(motor1B, false);
