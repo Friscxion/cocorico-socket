@@ -1,4 +1,4 @@
-const module = require("motor-l298n")
+const l29 = require("motor-l298n")
 
 let speed      = 100; // Percentage
 let in1Pin     = 17;
@@ -9,7 +9,7 @@ let in4Pin     = 15;
 let enable2Pin = 13;
 
 
-let l298n = module.setup(in1Pin, in2Pin, enable1Pin, in3Pin, in4Pin, enable2Pin);
+let l298n = l29.setup(in1Pin, in2Pin, enable1Pin, in3Pin, in4Pin, enable2Pin);
 
 l298n.forward(l298n.LEFT);
 l298n.forward(l298n.RIGHT);
