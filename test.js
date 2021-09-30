@@ -6,4 +6,5 @@ function readInput() {
     gpio.read(14, function(err, value) {
         console.log('The value is ' + value);
     });
+    gpio.write(14,true,()=>{})
 }
