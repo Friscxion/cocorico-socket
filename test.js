@@ -1,9 +1,5 @@
-let gpiop = require('rpi-gpio').promise;
+let gpio = require('rpi-gpio');
 
-gpiop.setup(1, gpiop.DIR_OUT)
-    .then(() => {
-        return gpiop.write(1, true)
-    })
-    .catch((err) => {
-        console.log('Error: ', err.toString())
-    })
+gpio.setup(14, gpio.DIR_OUT)
+gpio.write(14, true)
+
