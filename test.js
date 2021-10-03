@@ -1,16 +1,8 @@
-const Gpio = require('pigpio').Gpio;
-const prompt = require('prompt-sync')({sigint: true});
+const rpio = require("rpio");
+const IN1=14;
+const IN2=15;
 
-const forward = new Gpio(14, {mode: Gpio.OUTPUT});
-const back = new Gpio(15, {mode: Gpio.OUTPUT});
-
-forward.pwmWrite(100);
-back.pwmWrite(0);
-
-
-while(true){
-    if(prompt){
-        forward.pwmWrite(0);
-        back.pwmWrite(0);
-    }
-}
+rpio.open(IN1,rpio.PWM)
+rpio.pwmSetClockDivider(64);
+rpio.pwmSetRange(IN1, 1024);
+rpio.pwmSetData(IN1, 512);
