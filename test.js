@@ -1,14 +1,29 @@
-const rpio = require("rpio");
-const IN1=14;
-const IN2=15;
-let options = {
-    gpiomem: false,          /* Use /dev/gpiomem */
-    mapping: 'gpio',    /* Use the P1-P40 numbering scheme */
-    close_on_exit: true,    /* On node process exit automatically close rpio */
-}
+/**
+ * Sample for the motor-l298n.js.
+ *
+ * In this test we run the motors forward at 100%.
+ */
 
-rpio.init(options)
-rpio.open(IN1,rpio.PWM)
-rpio.pwmSetClockDivider(64);
-rpio.pwmSetRange(IN1, 1024);
-rpio.pwmSetData(IN1, 512);
+var speed      = 100; // Percentage
+var in1Pin     = 14;
+var in2Pin     = 15;
+var enable1Pin = 12;
+
+
+console.log("Starting motor-l298n - test_forward");
+
+var l298nModule = require("motor-l298n");
+var l298n = l298nModule.setup(in1Pin, in2Pin, enable1Pin);
+//console.log("Globals: LEFT=%d, RIGHT=%d", l298nModule.LEFT, l298nModule.RIGHT);
+
+l298n.forward(l298nModule.LEFT);
+l298n.forward(l298nModule.RIGHT);
+l298n.setSpeed(l298nModule.LEFT,speed);
+l298n.setSpeed(l298nModule.RIGHT,speed);
+console.log("Moving forward!!");
+
+setTimeout(function() {
+    l298n.stop(l298nModule.LEFT);
+    l298n.stop(l298nModule.RIGHT);
+    console.log("All done!");
+}, 180*1000);
