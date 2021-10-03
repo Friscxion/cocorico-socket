@@ -10,7 +10,7 @@ back.pwmWrite(0);
 
 while(true){
     if(prompt){
-        back.stop();
-        forward.stop();
+        forward.pwmWrite(0);
+        back.pwmWrite(0);
     }
 }
