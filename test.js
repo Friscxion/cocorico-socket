@@ -6,6 +6,3 @@ let dutyCycle = 0;
 
 forward.pwmWrite(100);
 back.pwmWrite(0);
-
-forward.start();
-back.start();
