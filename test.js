@@ -7,8 +7,6 @@ const back = new Gpio(15, {mode: Gpio.OUTPUT});
 forward.pwmWrite(100);
 back.pwmWrite(0);
 
-forward.start(0)
-back.start(0)
 
 while(true){
     if(prompt){
