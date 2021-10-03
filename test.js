@@ -1,16 +1,10 @@
-var gpio = require('rpi-gpio');
+const Gpio = require('pigpio').Gpio;
 
-gpio.setMode(gpio.MODE_BCM)
+const led = new Gpio(14, {mode: Gpio.OUTPUT});
 
-gpio.setup(14, gpio.DIR_OUT, ()=>{
-    gpio.output(14,gpio.DIR_HIGH,(e)=>{
-        console.log("e")
-    })
-});
-gpio.setup(15, gpio.DIR_OUT, ()=>{
-    gpio.output(15,gpio.DIR_LOW,(e)=>{
-        console.log("e")
-    })
-});
+let dutyCycle = 0;
 
-setTimeout(()=>{},5000)
+setInterval(() => {
+    led.pwmWrite(100);
+
+}, 20);
