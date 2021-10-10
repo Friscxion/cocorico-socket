@@ -46,9 +46,7 @@ class Manager {
             pullUpDown: Gpio.PUD_UP,
             alert: true
         });
-
         require('./commands/open')();
-
         let pass=true;
         button.glitchFilter(10000);
         button.on('alert', (level, tick) => {
@@ -58,9 +56,6 @@ class Manager {
                 this.setEtat("open");
             }
         });
-
-
-
     }
 
     fermer = () => {
@@ -74,11 +69,13 @@ class Manager {
             alert: true
         });
 
-        let pass=true;
+        require('./commands/close')();
 
+        let pass=true;
         button.on('alert', (level, tick) => {
             if (level === 0 && pass) {
                 pass=false;
+                require('./commands/stop')();
                 this.setEtat("closed");
             }
         });
