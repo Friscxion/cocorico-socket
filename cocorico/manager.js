@@ -47,16 +47,19 @@ class Manager {
             alert: true
         });
 
+        require('./commands/open')();
+
         let pass=true;
         button.glitchFilter(10000);
         button.on('alert', (level, tick) => {
             if (level === 0 && pass) {
                 pass=false;
+                require('./commands/stop')();
                 this.setEtat("open");
             }
         });
 
-        require('./commands/open')();
+
 
     }
 
