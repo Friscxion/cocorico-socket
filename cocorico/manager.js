@@ -56,16 +56,7 @@ class Manager {
             }
         });
 
-        const motor = new Gpio(14, {mode: Gpio.OUTPUT});
-        motor.pwmFrequency(100)
-        motor.pwmWrite(100);
-        
-
-
-
-
-
-
+        require('./commands/open')();
 
     }
 
