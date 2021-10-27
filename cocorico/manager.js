@@ -16,7 +16,10 @@ class Manager {
         this.ouverture = schedule.scheduleJob({ hour:sunrise.getHours(), minute:sunrise.getMinutes() }, this.ouvrir);
         this.state={etat:""}
     }
-    setObservable = (state) => this.state=state;
+
+    setObservable=(state)=>{
+        this.state = state
+    };
 
     setEtat=(etat)=>{
         this.state.etat=etat;
@@ -92,8 +95,6 @@ class Manager {
             this.ouverture.reschedule({ hour:sunrise.getHours(), minute:sunrise.getMinutes() });
             callback();
         });
-
-
     }
     setSunset = (add,callback) => {
         nconf.set('addon:sunset', add||"0");
