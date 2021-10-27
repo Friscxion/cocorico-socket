@@ -17,8 +17,8 @@ class Manager {
         this.state={etat:""}
     }
 
-    setObservable=(state)=>{
-        this.state = state
+    setObservable(state){
+        this.state = state;
     };
 
     setEtat=(etat)=>{
