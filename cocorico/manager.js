@@ -31,15 +31,23 @@ class Manager {
     }
 
 
-    getSunrise = () => SunRiseSet.getSunrise(LATITUDE,LONGITUDE);
+    getSunrise() {
+        SunRiseSet.getSunrise(LATITUDE, LONGITUDE)
+    };
 
-    getSunset = () => SunRiseSet.getSunset(LATITUDE,LONGITUDE);
+    getSunset() {
+        SunRiseSet.getSunset(LATITUDE, LONGITUDE)
+    };
 
-    getSunriseAddon = () => parseInt(nconf.get('addon').sunrise);
+    getSunriseAddon() {
+        parseInt(nconf.get('addon').sunrise)
+    };
 
-    getSunsetAddon  = () => parseInt(nconf.get('addon').sunset);
+    getSunsetAddon() {
+        parseInt(nconf.get('addon').sunset)
+    };
 
-    ouvrir = () => {
+    ouvrir(){
         if(this.state.etat==="pending" || this.state.etat==="open") return;
         else this.setEtat("pending");
 
@@ -61,7 +69,7 @@ class Manager {
         });
     }
 
-    fermer = () => {
+    fermer(){
         if(this.state.etat==="pending" || this.state.etat==="closed") return;
         else this.setEtat("pending");
 
@@ -88,7 +96,7 @@ class Manager {
 
     }
 
-    setSunrise = (add,callback) => {
+    setSunrise(add,callback){
         nconf.set('addon:sunrise', add||"0");
         nconf.save(()=>{
             let sunrise=new Date(this.getSunrise().setMinutes(this.getSunrise().getMinutes()+this.getSunriseAddon()));
@@ -96,15 +104,13 @@ class Manager {
             callback();
         });
     }
-    setSunset = (add,callback) => {
+    setSunset(add,callback){
         nconf.set('addon:sunset', add||"0");
         nconf.save(()=>{
             let sunset=new Date(this.getSunset().setMinutes(this.getSunset().getMinutes()+this.getSunsetAddon()));
             this.fermeture.reschedule({ hour:sunset.getHours(), minute:sunset.getMinutes() });
             callback();
         });
-
-
     }
 }
 
