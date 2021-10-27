@@ -21,12 +21,12 @@ class Manager {
         this.state = state;
     };
 
-    setEtat=(etat)=>{
+    setEtat(etat){
         this.state.etat=etat;
         this.state.callback();
     }
 
-    checkEtat=()=>{
+    checkEtat(){
         this.setEtat("undefined");
     }
 
