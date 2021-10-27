@@ -32,19 +32,19 @@ class Manager {
 
 
     getSunrise() {
-        SunRiseSet.getSunrise(LATITUDE, LONGITUDE)
+        return SunRiseSet.getSunrise(LATITUDE, LONGITUDE)
     };
 
     getSunset() {
-        SunRiseSet.getSunset(LATITUDE, LONGITUDE)
+        return SunRiseSet.getSunset(LATITUDE, LONGITUDE)
     };
 
     getSunriseAddon() {
-        parseInt(nconf.get('addon').sunrise)
+        return parseInt(nconf.get('addon').sunrise)
     };
 
     getSunsetAddon() {
-        parseInt(nconf.get('addon').sunset)
+        return parseInt(nconf.get('addon').sunset)
     };
 
     ouvrir(){
